@@ -1,12 +1,21 @@
-version: '3'
+version: '3.8'
 services: 
   buster:
     build: 
-      context: env/
+      context: .
+      dockerfile: ./env/Dockerfile
+    container_name: buster
+    hostname: buster
     tty: true
-    volumes: 
-      - ./config:/var/file/
     ports: 
+      # http/https用
       - 80:80
       - 443:443
+      # winlog用
+      - 5044:5044
+      # kibana用
       - 5601:5601
+      # LogonTracer用
+      - 7474:7474
+      - 7687:7687
+      - 8080:8080
